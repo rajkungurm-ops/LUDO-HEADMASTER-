@@ -1,0 +1,323 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    touch-action: manipulation;
+  }
+  html, body {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeSpeed;
+    background-color: #070b14;
+    color: #f8fafc;
+  }
+  button, [role="button"], input, select {
+    touch-action: manipulation;
+  }
+}
+
+/* 60fps/30fps Ultra-Smooth Mobile Optimized Game Engine - 0 Lagging */
+@keyframes token-bob-30fps {
+  0%, 100% {
+    transform: translate3d(0, -2px, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0) scale(1.06);
+  }
+}
+
+@keyframes ring-pulse-30fps {
+  0%, 100% {
+    transform: scale(1) translateZ(0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.35) translateZ(0);
+    opacity: 0.2;
+  }
+}
+
+@keyframes arrow-bob-left-30fps {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-5px, 0, 0);
+  }
+}
+
+@keyframes arrow-bob-right-30fps {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(5px, 0, 0);
+  }
+}
+
+.animate-token-bob {
+  animation: token-bob-30fps 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.animate-ring-pulse {
+  animation: ring-pulse-30fps 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.animate-arrow-left {
+  animation: arrow-bob-left-30fps 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.animate-arrow-right {
+  animation: arrow-bob-right-30fps 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* GPU Hardware-Accelerated Compositing Layer - 0 Lagging */
+.gpu-layer {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* UI Cleaning: Hide text clutter inside homes and duplicate bars */
+.home-label-green,
+.home-label-blue,
+.home-label-red,
+.home-label-yellow,
+.token-label-vertical,
+.room-info-top-bar-duplicate,
+.room-info-top-bar.duplicate {
+  display: none !important;
+}
+
+.board-cell, .cell, .home-circle {
+  overflow: visible !important;
+}
+
+/* Custom crisp dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(234, 179, 8, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(234, 179, 8, 0.8);
+}
+
+/* ============================================================== */
+/* FIRE PRO SYSTEM & UPGRADE SKINS (LIGHTWEIGHT 0-LAG CSS)        */
+/* ============================================================== */
+
+@keyframes fire-border-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px #f97316, 0 0 16px #ef4444;
+    border-color: #f97316;
+  }
+  50% {
+    box-shadow: 0 0 12px #facc15, 0 0 20px #dc2626;
+    border-color: #facc15;
+  }
+}
+
+@keyframes ice-border-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px #38bdf8, 0 0 16px #0284c7;
+    border-color: #38bdf8;
+  }
+  50% {
+    box-shadow: 0 0 12px #7dd3fc, 0 0 20px #0369a1;
+    border-color: #bae6fd;
+  }
+}
+
+@keyframes electric-border-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px #eab308, 0 0 16px #a855f7;
+    border-color: #eab308;
+  }
+  50% {
+    box-shadow: 0 0 12px #facc15, 0 0 20px #9333ea;
+    border-color: #fde047;
+  }
+}
+
+.fire-pro-avatar {
+  animation: fire-border-pulse 1.2s ease-in-out infinite;
+}
+
+.ice-pro-avatar {
+  animation: ice-border-pulse 1.2s ease-in-out infinite;
+}
+
+.electric-pro-avatar {
+  animation: electric-border-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes fire-burn-trail {
+  0% {
+    opacity: 1;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 10px #f97316) drop-shadow(0 -4px 8px #ef4444);
+  }
+  30% {
+    opacity: 0.95;
+    transform: scale(1.05);
+  }
+  65% {
+    opacity: 0.65;
+    transform: scale(0.9) translateY(-2px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.35) translateY(-8px);
+  }
+}
+
+@keyframes fire-flicker-anim {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+  }
+  50% {
+    transform: scale(1.08, 0.95) rotate(1.5deg);
+  }
+}
+
+.animate-fire-trail {
+  animation: fire-burn-trail 1.2s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-fire-flicker {
+  animation: fire-flicker-anim 0.35s ease-in-out infinite alternate;
+}
+
+@keyframes smoke-fade-out {
+  0% {
+    opacity: 0.95;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.65) translateY(-2px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2) translateY(-6px);
+  }
+}
+
+.animate-smoke-fade {
+  animation: smoke-fade-out 1s ease-out forwards;
+}
+
+/* ============================================================== */
+/* GLACIER ETERNAL - 100 DIAMOND DREAM OF KINGS ANIMATIONS        */
+/* ============================================================== */
+
+@keyframes glacier-snowfall {
+  0% {
+    transform: translate3d(0, -10px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(24px, 102vh, 0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.glacier-snow-fall {
+  animation-name: glacier-snowfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes cold-mist-rise {
+  0% {
+    transform: translate3d(0, 6px, 0) scale(0.92);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate3d(0, -6px, 0) scale(1.08);
+    opacity: 0.65;
+  }
+  100% {
+    transform: translate3d(0, -16px, 0) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.glacier-cold-mist {
+  animation: cold-mist-rise 2.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes golden-dream-glow {
+  0%, 100% {
+    box-shadow: 0 0 18px rgba(250, 204, 21, 0.65), 0 0 36px rgba(56, 189, 248, 0.45), inset 0 0 15px rgba(250, 204, 21, 0.25);
+    border-color: #fde047;
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(56, 189, 248, 0.85), 0 0 48px rgba(250, 204, 21, 0.75), inset 0 0 22px rgba(56, 189, 248, 0.35);
+    border-color: #7dd3fc;
+  }
+}
+
+.glacier-dream-frame {
+  animation: golden-dream-glow 2.2s ease-in-out infinite;
+}
+
+@keyframes coin-drop-into-diamond {
+  0% {
+    transform: translate3d(0, -75px, 0) scale(1.1) rotate(0deg);
+    opacity: 1;
+  }
+  70% {
+    transform: translate3d(0, 8px, 0) scale(0.85) rotate(260deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 24px, 0) scale(0.2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-coin-drop {
+  animation: coin-drop-into-diamond 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+

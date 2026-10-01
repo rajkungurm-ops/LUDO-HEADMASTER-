@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "Player": {
+      "title": "Player",
+      "description": "User profile, presence and online status",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "avatar": { "type": "string" },
+        "isOnline": { "type": "boolean" },
+        "lastSeen": { "type": "number" },
+        "currentRoomId": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "RecentOpponent": {
+      "title": "RecentOpponent",
+      "description": "Opponent player saved after a match for direct invites",
+      "type": "object",
+      "properties": {
+        "opponentId": { "type": "string" },
+        "name": { "type": "string" },
+        "avatar": { "type": "string" },
+        "playedAt": { "type": "number" },
+        "gameCount": { "type": "number" },
+        "lastResult": { "type": "string" }
+      },
+      "required": ["opponentId", "name", "playedAt"]
+    },
+    "GameInvite": {
+      "title": "GameInvite",
+      "description": "Direct in-game real-time match invite",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fromPlayerId": { "type": "string" },
+        "fromPlayerName": { "type": "string" },
+        "fromPlayerAvatar": { "type": "string" },
+        "toPlayerId": { "type": "string" },
+        "roomId": { "type": "string" },
+        "playerCount": { "type": "number" },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "accepted", "declined", "busy", "expired"]
+        },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "fromPlayerId", "toPlayerId", "roomId", "status"]
+    },
+    "GameRoom": {
+      "title": "GameRoom",
+      "description": "Real-time game room coordination",
+      "type": "object",
+      "properties": {
+        "roomId": { "type": "string" },
+        "playerCount": { "type": "number" },
+        "status": { "type": "string" },
+        "currentTurn": { "type": "string" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["roomId", "playerCount", "status"]
+    }
+  },
+  "firestore": {
+    "/players/{playerId}": {
+      "schema": "Player",
+      "description": "Public profile and real-time presence of players"
+    },
+    "/players/{playerId}/recentOpponents/{opponentId}": {
+      "schema": "RecentOpponent",
+      "description": "History of opponents played against for direct invites"
+    },
+    "/gameInvites/{inviteId}": {
+      "schema": "GameInvite",
+      "description": "Direct real-time match invitation between players"
+    },
+    "/gameRooms/{roomId}": {
+      "schema": "GameRoom",
+      "description": "Active game room state"
+    }
+  }
+}

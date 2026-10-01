@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="LudoHeadmaster" />
+    <meta name="application-name" content="LudoHeadmaster" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a2d64" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>LUDO HEADMASTER - ONLINE &amp; OFFLINE - 2,3,4 Player Multiplayer</title>
+    <meta name="description" content="LUDO HEADMASTER - ONLINE &amp; OFFLINE - 2,3,4 Player Multiplayer with real-time matchmaking, smart bot fallback, 3D dice, and sound effects." />
+    <meta property="og:title" content="LUDO HEADMASTER" />
+    <meta property="og:description" content="ONLINE &amp; OFFLINE - 2,3,4 Player Multiplayer" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script>
+      // 1. Early capture of beforeinstallprompt so Chrome Direct App Install is never missed
+      window.__deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        window.__deferredPrompt = e;
+        window.dispatchEvent(new CustomEvent('pwa-prompt-ready', { detail: e }));
+      });
+
+      // 2. Immediate Service Worker Registration on start
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(function(reg) {
+            console.log('PWA ServiceWorker registered with scope:', reg.scope);
+          })
+          .catch(function(err) {
+            console.warn('PWA ServiceWorker registration error:', err);
+          });
+      }
+    </script>
+    <script>
+      // Ignore HMR WebSocket connection notices per AI Studio environment constraints
+      (function() {
+        const filterViteMsg = function(msg) {
+          if (!msg) return false;
+          const str = typeof msg === 'string' ? msg : (msg.message || msg.toString?.() || '');
+          return str.includes('[vite]') || str.includes('WebSocket') || str.includes('ws:');
+        };
+        const origError = console.error;
+        console.error = function(...args) {
+          if (args.some(filterViteMsg)) return;
+          origError.apply(console, args);
+        };
+        const origWarn = console.warn;
+        console.warn = function(...args) {
+          if (args.some(filterViteMsg)) return;
+          origWarn.apply(console, args);
+        };
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased select-none overflow-x-hidden font-['Outfit',sans-serif]" style="background-color: #070b14; color: #f8fafc;">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

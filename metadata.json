@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Remix Remix Remix Remix Remix Remix Ludo King Master - Multiplayer \u0026 Chat",
+  "description": "Authentic Ludo King board game with real-time multiplayer, live in-game chat, animated token hopping, 3D dice rolling, winner celebrations, and leaderboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
